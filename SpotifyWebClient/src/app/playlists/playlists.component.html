@@ -1,0 +1,42 @@
+<p>Playlists:</p>
+
+<div class="panel-body">
+  <div class="table-responsive">
+    <table class="table" *ngIf="playlistOverview">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Public</th>
+          <th>Tracks</th>
+          <th>Uri</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="
+            let item of playlistOverview.items | slice: 0:3;
+            let i = index
+          "
+        >
+          <td>
+            <a [routerLink]="['/playlists-tracks', item.uri]">
+              {{ item.name }}
+            </a>
+          </td>
+          <td>{{ item.public }}</td>
+          <td>{{ item.tracks.total }}</td>
+          <td>{{ item.uri }}</td>
+          <td>
+            <a
+              class="btn btn-primary"
+              [routerLink]="['/playlists-add', item.uri]"
+            >
+              Add
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

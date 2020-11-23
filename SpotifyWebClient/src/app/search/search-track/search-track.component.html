@@ -1,0 +1,22 @@
+<p>
+  Search songs:
+</p>
+
+<div class="panel-body">
+  <form class="form-horizontal" (ngSubmit)="processPostAndCreateBatches()" [formGroup]="tracksForm">
+    <fieldset>
+      <div class="col-md-8">
+        <textarea class="form-control" id="urisId" type="text" placeholder="artist - track" formControlName="tracks"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+          <span>
+            <button class="btn btn-success" type="submit" [disabled]="!tracksForm.valid">
+              Save
+            </button>
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

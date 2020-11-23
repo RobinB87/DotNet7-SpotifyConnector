@@ -1,0 +1,27 @@
+<p>
+  Add songs:
+</p>
+
+<div class="panel-body">
+  <form class="form-horizontal" (ngSubmit)="processPostAndCreateBatches()" [formGroup]="songsForm">
+    <fieldset>
+      <label class="col-md-2 control-label" for="playlistId">PlaylistId</label>
+      <div class="col-md-8">
+        <input class="form-control" id="playlistId" type="text" placeholder="playlistId" formControlName="playlistId" />
+      </div>
+      <label class="col-md-2 control-label" for="urisId">Uris</label>
+      <div class="col-md-8">
+        <textarea class="form-control" id="urisId" type="text" placeholder="uris" formControlName="uris"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+          <span>
+            <button class="btn btn-success" type="submit" [disabled]="!songsForm.valid">
+              Save
+            </button>
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

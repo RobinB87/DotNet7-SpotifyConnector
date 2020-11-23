@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align: center">
+  <h4>Welcome to {{ title }}!</h4>
+</div>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <a class="navbar-brand">{{ title }}</a>
+    <ul class="navbar navbar-nav">
+      <li><a [routerLink]="['/auth']">Login</a></li>
+      <li><a [routerLink]="['/playlists']">Playlists</a></li>
+      <li><a [routerLink]="['/search']">Search</a></li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
