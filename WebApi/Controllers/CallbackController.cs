@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Repository.Services;
 using System;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.Extensions.Logging;
-using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    /// <summary>
-    /// The call back controller
-    /// </summary>
     [Route("api/callback")]
     public class CallbackController : Controller
     {
@@ -19,17 +15,6 @@ namespace WebApi.Controllers
         private readonly IAccessTokenRepository _accessTokenRepository;
         private readonly IAuthService _spotifyService;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="CallbackController" />
-        /// </summary>
-        /// <param name="logger">The logger</param>
-        /// <param name="mapper">The mapper</param>
-        /// <param name="accessTokenRepository">The access token repository</param>
-        /// <param name="spotifyService">The spotify service</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="logger" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="mapper" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="accessTokenRepository" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="spotifyService" /> is null.</exception>
         public CallbackController(ILogger<CallbackController> logger, IMapper mapper,
             IAccessTokenRepository accessTokenRepository, IAuthService spotifyService)
         {

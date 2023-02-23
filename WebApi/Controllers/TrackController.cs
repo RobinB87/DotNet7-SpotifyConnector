@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using Repository.Services;
 using System;
 using System.Configuration;
-using System.Net.Http;
 using System.Threading.Tasks;
 using WebApi.Models;
 
@@ -21,17 +20,6 @@ namespace WebApi.Controllers
 
         private readonly string _trackUriBase;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="TrackController" />
-        /// </summary>
-        /// <param name="logger">The logger</param>
-        /// <param name="mapper">The mapper</param>
-        /// <param name="accessTokenRepository">The access token repository</param>
-        /// <param name="authService">The access token repository</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="logger" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="mapper" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="accessTokenRepository" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="authService" /> is null.</exception>
         public TrackController(ILogger<TrackController> logger, IMapper mapper,
             IAccessTokenRepository accessTokenRepository, IAuthService authService)
         {
