@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Repository.Services;
 using System;
@@ -13,18 +11,12 @@ namespace WebApi.Controllers
     [Route("api/search")]
     public class TrackController : Controller
     {
-        private readonly ILogger _logger;
-        private readonly IMapper _mapper;
         private readonly IAccessTokenRepository _accessTokenRepository;
         private readonly IAuthService _authService;
-
         private readonly string _trackUriBase;
 
-        public TrackController(ILogger<TrackController> logger, IMapper mapper,
-            IAccessTokenRepository accessTokenRepository, IAuthService authService)
+        public TrackController(IAccessTokenRepository accessTokenRepository, IAuthService authService)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _accessTokenRepository = accessTokenRepository ?? throw new ArgumentNullException(nameof(accessTokenRepository));
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
 

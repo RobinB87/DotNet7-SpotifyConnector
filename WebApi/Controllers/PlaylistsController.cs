@@ -24,17 +24,6 @@ namespace WebApi.Controllers
         private readonly string _playlistUriBase;
         private readonly string _playlistUri;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="PlaylistsController" />
-        /// </summary>
-        /// <param name="logger">The logger</param>
-        /// <param name="mapper">The mapper</param>
-        /// <param name="accessTokenRepository">The access token repository</param>
-        /// <param name="authService">The access token repository</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="logger" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="mapper" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="accessTokenRepository" /> is null.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="authService" /> is null.</exception>
         public PlaylistsController(ILogger<PlaylistsController> logger, IMapper mapper, 
             IAccessTokenRepository accessTokenRepository, IAuthService authService)
         {
