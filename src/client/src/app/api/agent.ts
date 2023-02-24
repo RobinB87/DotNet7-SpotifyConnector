@@ -12,7 +12,7 @@ const requests = {
 };
 
 const Auth = {
-  login: () => requests.get("/auth/login"),
+  login: () => requests.get<string>("/auth/login"),
 };
 
 const agent = {

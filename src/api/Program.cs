@@ -1,9 +1,17 @@
 using api.Core.DependencyInjection;
 using api.Core.Extensions;
 
+var allowAllCors = "AllowAllOriginsHeadersAndMethods";
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddConfigurationOptions(builder.Configuration); 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(allowAllCors, builder => 
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
 
 builder.Services.AddControllers();
 //builder.Services.AddIdentityServices(builder.Configuration);
@@ -19,6 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(allowAllCors);
 
 app.UseAuthorization();
 
