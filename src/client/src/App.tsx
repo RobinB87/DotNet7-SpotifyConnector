@@ -1,13 +1,13 @@
 import Login from "./app/features/auth/Login";
-import Tracks, { ITracksProps } from "./app/features/tracks/Tracks";
+import Token, { ITokenProps } from "./app/features/auth/Token";
 import "./App.css";
 
 const App = () => {
-  const tracksProps: ITracksProps = {
-    authCode: new URLSearchParams(window.location.search).get("code"),
+  const tokenProps: ITokenProps = {
+    authCode: new URLSearchParams(window.location.search).get("code") ?? "",
   };
 
-  return <>{tracksProps.authCode ? <Tracks {...tracksProps} /> : <Login />}</>;
+  return <>{tokenProps.authCode ? <Token {...tokenProps} /> : <Login />}</>;
 };
 
 export default App;

@@ -1,7 +1,11 @@
 using api.Core.Configuration;
 using api.Core.Extensions;
+using domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace api.Controllers;
 
@@ -28,48 +32,23 @@ public class AuthController : ControllerBase
             : response.StatusCode.ToString();
     }
 
-    //[HttpGet("redirect")]
-    //public async Task<ActionResult<AccessToken>> GetAccessTokenFromSpotify(string code)
-    //{
-    //    var content = $"grant_type=authorization_code&redirect_uri={_spotifyConfiguration.RedirectUri}&code={code}";
+    [HttpGet("token/{code}")]
+    public async Task<ActionResult<AccessToken>> GetAccessTokenFromSpotify(string code)
+    {
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        client.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue($"Basic", Convert.ToBase64String(
+                Encoding.ASCII.GetBytes(
+                    $"{_spotifyConfiguration.ClientId}:{_spotifyConfiguration.ClientSecret}")));
 
-    //    var body = CreateMessageBody(content, "application/x-www-form-urlencoded",
-    //        new Dictionary<string, object>
-    //        {
-    //                {"code", code},
-    //                {"redirectUri", _spotifyConfiguration.RedirectUri},
-    //        });
+        var response = await client.SendAsync(_spotifyConfiguration.GetAccessTokenRequestMessage(code));
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            return Ok(JsonConvert.DeserializeObject<AccessToken>(content));
+        }
 
-    //    // Content type header
-    //    var request = new HttpRequestMessage(HttpMethod.Post, _spotifyConfiguration.TokenRequestUri)
-    //    {
-    //        Content = body
-    //    };
-
-    //    // Set basic auth to get access token
-    //    var client = new HttpClient();
-    //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    //    client.DefaultRequestHeaders.Authorization =
-    //        new AuthenticationHeaderValue($"Basic", Convert.ToBase64String(
-    //            Encoding.ASCII.GetBytes(
-    //                $"{_spotifyConfiguration.ClientId}:{_spotifyConfiguration.ClientSecret}")));
-
-    //    var response = await client.SendAsync(request);
-    //    var responseContent = await response.Content.ReadAsStringAsync();
-    //    return Ok(JsonConvert.DeserializeObject<AccessToken>(responseContent));
-    //}
-
-    //private static StringContent CreateMessageBody(string body, string mediaType, Dictionary<string, object> placeholders = null)
-    //{
-    //    if (string.IsNullOrWhiteSpace(body)) return null;
-    //    if (placeholders != null)
-    //    {
-    //        foreach (var pair in placeholders)
-    //        {
-    //            body = body.Replace($"{{{{{pair.Key}}}}}", pair.Value.ToString());
-    //        }
-    //    }
-
-    //    return new StringContent(body, Encoding.UTF8, mediaType);
-    //}
+        return Unauthorized();
+    }
 }

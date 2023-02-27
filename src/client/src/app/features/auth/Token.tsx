@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
 
-const Login = () => {
+export interface ITokenProps {
+  authCode: string;
+}
+
+const Token = (props: ITokenProps) => {
   const dataFetchedRef = useRef(false);
   const [uri, setUri] = useState("");
 
   const fetchData = async () => {
-    setUri(await agent.Auth.login());
+    setUri(await agent.Auth.token(props.authCode));
   };
 
   useEffect(() => {
@@ -16,17 +20,7 @@ const Login = () => {
     fetchData();
   }, []);
 
-  return (
-    <>
-      {uri ? (
-        <a href={uri}>
-          <button>Login with Spotify</button>
-        </a>
-      ) : (
-        ""
-      )}
-    </>
-  );
+  return <></>;
 };
 
-export default Login;
+export default Token;

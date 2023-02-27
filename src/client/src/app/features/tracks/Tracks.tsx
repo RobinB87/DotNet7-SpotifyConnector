@@ -1,9 +1,4 @@
-export interface ITracksProps {
-  authCode: string | null;
-}
-
-const Tracks = (props: ITracksProps) => {
-  console.log("authCode", props.authCode);
+const Tracks = () => {
   return <>Tracksssss (logged in)</>;
 };
 

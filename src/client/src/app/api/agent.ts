@@ -13,6 +13,7 @@ const requests = {
 
 const Auth = {
   login: () => requests.get<string>("/auth/login"),
+  token: (token: string) => requests.get<any>(`/auth/token/${token}`),
 };
 
 const agent = {
