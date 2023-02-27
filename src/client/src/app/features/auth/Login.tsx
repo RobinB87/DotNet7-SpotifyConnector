@@ -1,4 +1,4 @@
-import TokenService from "../../api/tokenService";
+import TokenService from "../../services/tokenService";
 import Token, { ITokenProps } from "./Token";
 import SpotifyLogin from "./SpotifyLogin";
 import Tracks from "../tracks/Tracks";
