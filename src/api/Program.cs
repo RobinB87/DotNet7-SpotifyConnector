@@ -1,4 +1,5 @@
 using api.Core.DependencyInjection;
+using api.Core.Extensions;
 
 var allowAllCors = "AllowAllOriginsHeadersAndMethods";
 
@@ -12,8 +13,9 @@ builder.Services.AddCors(options =>
         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
+builder.Services.AddHttpClients();
+
 builder.Services.AddControllers();
-//builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

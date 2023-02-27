@@ -1,6 +1,5 @@
 ﻿using api.Core.Configuration;
 using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
 
 namespace api.Core.Extensions;
 internal static class SpotifyConfigurationExtensions

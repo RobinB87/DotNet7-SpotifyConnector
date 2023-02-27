@@ -2,8 +2,8 @@
 using domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 
 namespace api.Controllers;
 
@@ -19,12 +19,14 @@ public class PlaylistController : ControllerBase
             ?? throw new ArgumentNullException(nameof(dataConfig));
     }
 
-    [HttpGet("{token}")]
-    public async Task<ActionResult<PlaylistOverview?>> Get(string token)
+    [HttpGet]
+    public async Task<ActionResult<PlaylistOverview?>> Get()
     {
+        var token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
+
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Accept", "application/json");
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue($"Bearer", token);
+        //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue($"Bearer", token);
 
         var response = await client.GetAsync($"{_dataConfig.ApiUriBase}/{_dataConfig.PlaylistUri}");
 
