@@ -1,31 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-
-import agent from "../../api/agent";
+import TokenService from "../../api/tokenService";
+import Token, { ITokenProps } from "./Token";
+import SpotifyLogin from "./SpotifyLogin";
+import Tracks from "../tracks/Tracks";
 
 const Login = () => {
-  const dataFetchedRef = useRef(false);
-  const [uri, setUri] = useState("");
-
-  const fetchData = async () => {
-    setUri(await agent.Auth.login());
+  const tokenProps: ITokenProps = {
+    authCode: new URLSearchParams(window.location.search).get("code") ?? "",
   };
 
-  useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    fetchData();
-  }, []);
-
   return (
-    <>
-      {uri ? (
-        <a href={uri}>
-          <button>Login with Spotify</button>
-        </a>
-      ) : (
-        ""
-      )}
-    </>
+    <>{TokenService.tokenValid() ? <Tracks /> : tokenProps.authCode ? <Token {...tokenProps} /> : <SpotifyLogin />}</>
   );
 };
 

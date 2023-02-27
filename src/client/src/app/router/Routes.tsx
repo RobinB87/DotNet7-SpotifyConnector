@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 
 import App from "../../App";
-import LoginForm from "../features/auth/Login";
-// import { Redirect } from "../features/auth/Redirect";
+import Login from "../features/auth/Login";
+import Tracks from "../features/tracks/Tracks";
 
 export const routes: RouteObject[] = [
   {
@@ -11,12 +11,12 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: "",
-        element: <LoginForm />,
+        element: <Login />,
       },
-      // {
-      //   path: "/redirect",
-      //   element: <Redirect />,
-      // },
+      {
+        path: "tracks",
+        element: <Tracks />,
+      },
     ],
   },
 ];
