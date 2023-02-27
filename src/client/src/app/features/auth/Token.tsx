@@ -12,7 +12,7 @@ const Token = (props: ITokenProps) => {
 
   const fetchData = async () => {
     const token = await agent.Auth.token(props.authCode);
-    TokenService.setToken(token.token);
+    TokenService.setToken(JSON.stringify(token));
   };
 
   useEffect(() => {
