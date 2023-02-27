@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
-import TokenService from "../../services/tokenService";
 import { PlaylistOverview } from "../../models/playlist";
 
 const Playlists = () => {
@@ -9,8 +8,7 @@ const Playlists = () => {
   const [overview, setOverview] = useState<PlaylistOverview | null>(null);
 
   const fetchData = async () => {
-    const token = TokenService.getToken();
-    setOverview(await agent.Playlists.get(token));
+    setOverview(await agent.Playlists.get());
   };
 
   useEffect(() => {
