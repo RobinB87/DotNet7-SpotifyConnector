@@ -5,7 +5,7 @@ using System.Text;
 namespace api.Core.Extensions;
 internal static class SpotifyConfigurationExtensions
 {
-    internal static Uri GetAuthorizationCodeUri(this SpotifyConfiguration config)
+    internal static Uri GetAuthorizationCodeUri(this AuthConfiguration config)
     {
         var authParams = new Dictionary<string, string?> {
             { "client_id", config.ClientId },
@@ -17,7 +17,7 @@ internal static class SpotifyConfigurationExtensions
             $"{config.BaseUri}/{config.AuthorizeUri}", authParams));
     }
 
-    internal static HttpRequestMessage GetAccessTokenRequestMessage(this SpotifyConfiguration config, string authorizationCode)
+    internal static HttpRequestMessage GetAccessTokenRequestMessage(this AuthConfiguration config, string authorizationCode)
     {
         var content = new Dictionary<string, string>
         {

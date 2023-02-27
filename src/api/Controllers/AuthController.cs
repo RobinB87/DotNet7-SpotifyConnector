@@ -13,12 +13,12 @@ namespace api.Controllers;
 [Route("[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly SpotifyConfiguration _spotifyConfiguration;
+    private readonly AuthConfiguration _authConfig;
 
     public AuthController(
-        IOptions<SpotifyConfiguration> spotifyConfiguration)
+        IOptions<AuthConfiguration> spotifyConfiguration)
     {
-        _spotifyConfiguration = spotifyConfiguration.Value
+        _authConfig = spotifyConfiguration.Value
             ?? throw new ArgumentNullException(nameof(spotifyConfiguration));
     }
 
@@ -26,7 +26,7 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<string?>> GetSpotifyLoginUri()
     {
         var client = new HttpClient();
-        var response = await client.GetAsync(_spotifyConfiguration.GetAuthorizationCodeUri());
+        var response = await client.GetAsync(_authConfig.GetAuthorizationCodeUri());
         return response.IsSuccessStatusCode
             ? response.RequestMessage?.RequestUri?.ToString()
             : response.StatusCode.ToString();
@@ -40,9 +40,9 @@ public class AuthController : ControllerBase
         client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue($"Basic", Convert.ToBase64String(
                 Encoding.ASCII.GetBytes(
-                    $"{_spotifyConfiguration.ClientId}:{_spotifyConfiguration.ClientSecret}")));
+                    $"{_authConfig.ClientId}:{_authConfig.ClientSecret}")));
 
-        var response = await client.SendAsync(_spotifyConfiguration.GetAccessTokenRequestMessage(code));
+        var response = await client.SendAsync(_authConfig.GetAccessTokenRequestMessage(code));
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();

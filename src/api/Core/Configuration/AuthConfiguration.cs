@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace api.Core.Configuration;
-public class SpotifyConfiguration
+﻿namespace api.Core.Configuration;
+public class AuthConfiguration
 {
-    public const string AppSettingsName = "Spotify";
+    public const string AppSettingsName = "Auth";
 
     // Authorize
     public string AuthorizeUri { get; set; } = string.Empty;

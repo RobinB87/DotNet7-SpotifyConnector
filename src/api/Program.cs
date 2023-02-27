@@ -1,5 +1,4 @@
 using api.Core.DependencyInjection;
-using api.Core.Extensions;
 
 var allowAllCors = "AllowAllOriginsHeadersAndMethods";
 

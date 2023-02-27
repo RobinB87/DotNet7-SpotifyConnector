@@ -2,7 +2,9 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 
 import App from "../../App";
 import Login from "../features/auth/Login";
-import Tracks from "../features/tracks/Tracks";
+import Playlists from "../features/playlists/Playlists";
+
+export const homepage = "playlists";
 
 export const routes: RouteObject[] = [
   {
@@ -14,8 +16,8 @@ export const routes: RouteObject[] = [
         element: <Login />,
       },
       {
-        path: "tracks",
-        element: <Tracks />,
+        path: homepage,
+        element: <Playlists />,
       },
     ],
   },

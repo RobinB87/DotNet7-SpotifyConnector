@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { router } from "../../router/Routes";
+import { homepage, router } from "../../router/Routes";
 
 import agent from "../../api/agent";
 import TokenService from "../../services/tokenService";
@@ -14,7 +14,7 @@ const Token = (props: ITokenProps) => {
   const fetchData = async () => {
     const token = await agent.Auth.token(props.authCode);
     TokenService.setToken(JSON.stringify(token));
-    router.navigate("/tracks");
+    router.navigate(homepage);
   };
 
   useEffect(() => {
