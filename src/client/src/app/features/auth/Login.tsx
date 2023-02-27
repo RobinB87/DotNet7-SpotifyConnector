@@ -8,7 +8,10 @@ const Login = () => {
     authCode: new URLSearchParams(window.location.search).get("code") ?? "",
   };
 
-  if (TokenService.tokenValid()) router.navigate(homepage);
+  if (TokenService.tokenValid()) {
+    router.navigate(homepage);
+    return <></>;
+  }
 
   return <>{tokenProps.authCode ? <Token {...tokenProps} /> : <SpotifyLogin />}</>;
 };
