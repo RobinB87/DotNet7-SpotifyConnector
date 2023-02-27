@@ -1,8 +1,7 @@
 using api.Core.Configuration;
+using api.Core.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Text;
-using System.Web;
 
 namespace api.Controllers;
 
@@ -10,7 +9,6 @@ namespace api.Controllers;
 [Route("[controller]")]
 public class AuthController : ControllerBase
 {
-    //private readonly UserManager<User> _userManager;
     private readonly SpotifyConfiguration _spotifyConfiguration;
 
     public AuthController(
@@ -20,29 +18,14 @@ public class AuthController : ControllerBase
             ?? throw new ArgumentNullException(nameof(spotifyConfiguration));
     }
 
-    //public AuthController(UserManager<User> userManager)
-    //{
-    //    _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-    //}
-
     [HttpGet("login")]
-    public async Task<ActionResult<string>> GetSpotifyLoginUri()
+    public async Task<ActionResult<string?>> GetSpotifyLoginUri()
     {
-        // Create Uri Builder
-        var builder = new UriBuilder(_spotifyConfiguration.BaseUri) { Port = -1 };
-
-        // Create the query
-        var query = HttpUtility.ParseQueryString(builder.Query);
-        query["client_id"] = _spotifyConfiguration.ClientId;
-        query["response_type"] = _spotifyConfiguration.ResponseType;
-        query["redirect_uri"] = _spotifyConfiguration.RedirectUri;
-        query["scope"] = _spotifyConfiguration.Scopes;
-
-        builder.Query = query.ToString();
-
         var client = new HttpClient();
-        var response = await client.GetAsync(builder.ToString());
-        return !response.IsSuccessStatusCode ? string.Empty : response.RequestMessage.RequestUri.ToString();
+        var response = await client.GetAsync(_spotifyConfiguration.GetAuthorizationCodeUri());
+        return response.IsSuccessStatusCode 
+            ? response.RequestMessage?.RequestUri?.ToString()
+            : response.StatusCode.ToString();
     }
 
     //[HttpGet("redirect")]

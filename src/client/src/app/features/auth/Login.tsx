@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
 
 const Login = () => {
-  // const navigate = useNavigate();
-  // const handleClick = async () => {};
-
   const [uri, setUri] = useState("");
-  useEffect(() => {
-    async function getUri() {
-      setUri(await agent.Auth.login());
-    }
+  const dataFetchedRef = useRef(false);
 
-    getUri();
+  const fetchData = async () => {
+    setUri(await agent.Auth.login());
+  };
+
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    fetchData();
   }, []);
 
   return (
     <>
-      {/* <button 
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        Login
-      </button> */}
-      <a href={uri}>Login with Spotify</a>
+      {uri ? (
+        <a href={uri}>
+          <button>Login with Spotify</button>
+        </a>
+      ) : (
+        ""
+      )}
     </>
   );
 };
