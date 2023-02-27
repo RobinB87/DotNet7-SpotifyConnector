@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
+import { AccessToken } from "../models/accessToken";
+
 axios.defaults.baseURL = "https://localhost:44381";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
@@ -13,7 +15,7 @@ const requests = {
 
 const Auth = {
   login: () => requests.get<string>("/auth/login"),
-  token: (token: string) => requests.get<any>(`/auth/token/${token}`),
+  token: (token: string) => requests.get<AccessToken>(`/auth/token/${token}`),
 };
 
 const agent = {

@@ -17,4 +17,6 @@ public class AccessToken
 
     [JsonProperty("scope")]
     public string Scope { get; set; } = string.Empty;
+
+    public DateTimeOffset? ValidUntil { get; set; }
 }

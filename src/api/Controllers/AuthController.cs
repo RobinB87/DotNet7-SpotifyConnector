@@ -27,13 +27,13 @@ public class AuthController : ControllerBase
     {
         var client = new HttpClient();
         var response = await client.GetAsync(_spotifyConfiguration.GetAuthorizationCodeUri());
-        return response.IsSuccessStatusCode 
+        return response.IsSuccessStatusCode
             ? response.RequestMessage?.RequestUri?.ToString()
             : response.StatusCode.ToString();
     }
 
     [HttpGet("token/{code}")]
-    public async Task<ActionResult<AccessToken>> GetAccessTokenFromSpotify(string code)
+    public async Task<ActionResult<AccessToken?>> GetAccessTokenFromSpotify(string code)
     {
         var client = new HttpClient();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -46,7 +46,13 @@ public class AuthController : ControllerBase
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
-            return Ok(JsonConvert.DeserializeObject<AccessToken>(content));
+            var token = JsonConvert.DeserializeObject<AccessToken>(content);
+
+            if (token == null)
+                return BadRequest();
+
+            token.ValidUntil = DateTime.UtcNow + TimeSpan.FromSeconds(token.ExpiresIn);
+            return token;
         }
 
         return Unauthorized();

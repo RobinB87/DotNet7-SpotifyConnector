@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
+import TokenService from "../../api/tokenService";
 
 export interface ITokenProps {
   authCode: string;
@@ -8,10 +9,10 @@ export interface ITokenProps {
 
 const Token = (props: ITokenProps) => {
   const dataFetchedRef = useRef(false);
-  const [uri, setUri] = useState("");
 
   const fetchData = async () => {
-    setUri(await agent.Auth.token(props.authCode));
+    const token = await agent.Auth.token(props.authCode);
+    TokenService.setToken(token.token);
   };
 
   useEffect(() => {
