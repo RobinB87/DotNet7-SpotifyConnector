@@ -1,7 +1,8 @@
-import { Stack, Button, Typography } from "@mui/material";
 import { useState } from "react";
+import { Stack, Button, Typography } from "@mui/material";
+
 import { PlaylistSummary } from "../../models/library";
-import Playlist from "./PlaylistItem";
+import PlaylistTracksDialog from "./PlaylistTracksDialog";
 
 export interface PlaylistListProps {
   playlists: PlaylistSummary[];
@@ -32,7 +33,7 @@ const PlaylistList = ({ playlists }: PlaylistListProps) => {
           </Button>
         ))}
       </Stack>
-      <Playlist id={selectedId} open={open} onClose={handleClose} />
+      {open && <PlaylistTracksDialog id={selectedId} open={open} onClose={handleClose} />}
     </>
   );
 };

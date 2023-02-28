@@ -6,4 +6,5 @@ public class ApiConfiguration
     public string BaseUri { get; set; } = string.Empty;
     public string PlaylistUri { get; set; } = string.Empty;
     public string SearchUri { get; set; } = string.Empty;
+    public string TracksByPlaylistId { get; set; } = string.Empty;
 }

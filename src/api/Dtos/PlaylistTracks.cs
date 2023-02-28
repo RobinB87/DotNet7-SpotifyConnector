@@ -1,13 +1,37 @@
 ﻿using Newtonsoft.Json;
 
 namespace api.Dtos;
-public class PlaylistOverview
+public class PlaylistTracks
 {
     [JsonProperty("items")]
-    public List<Item> Items { get; set; } = new List<Item>();
+    public List<TrackSummary> TrackSummaries { get; set; } = new List<TrackSummary>();
 
     [JsonProperty("total")]
     public int Total { get; set; }
+}
+
+public class TrackSummary
+{
+    [JsonProperty("track")]
+    public Track? Track { get; set; }
+}
+
+public class Track
+{
+    [JsonProperty("album")]
+    public Album? Album { get; set; }
+
+    [JsonProperty("artists")]
+    public List<Artist> Artists { get; set; } = new List<Artist>();
+
+    [JsonProperty("id")]
+    public string Id { get; set; } = string.Empty;
+
+    [JsonProperty("name")]
+    public string Name { get; set; } = string.Empty;
+
+    [JsonProperty("popularity")]
+    public int Popularity { get; set; }
 }
 
 public class Album
@@ -41,31 +65,4 @@ public class Image
 
     [JsonProperty("url")]
     public string Url { get; set; } = string.Empty;
-}
-
-public class Item
-{
-    [JsonProperty("primary_color")]
-    public object PrimaryColor { get; set; } = string.Empty;
-
-    [JsonProperty("track")]
-    public Track? Track { get; set; }
-}
-
-public class Track
-{
-    [JsonProperty("album")]
-    public Album? Album { get; set; }
-
-    [JsonProperty("artists")]
-    public List<Artist> Artists { get; set; } = new List<Artist>();
-
-    [JsonProperty("id")]
-    public string Id { get; set; } = string.Empty;
-
-    [JsonProperty("name")]
-    public string Name { get; set; } = string.Empty;
-
-    [JsonProperty("popularity")]
-    public int Popularity { get; set; }
 }

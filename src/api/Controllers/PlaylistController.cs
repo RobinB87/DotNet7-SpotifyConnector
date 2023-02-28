@@ -1,5 +1,6 @@
 ﻿using api.Core.Configuration;
 using api.Core.Extensions;
+using api.Dtos;
 using api.Services;
 using domain;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +24,14 @@ public class PlaylistController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<Library?>> Get()
     {
-        var response = await _apiService.GetWithBearerToken<Library>(
+        return await _apiService.GetWithBearerToken<Library>(
             this.CreateRequestMessageWithBearerToken(HttpMethod.Get, _apiConfig.PlaylistUri));
+    }
 
-        return response;
+    [HttpGet("{id}/tracks")]
+    public async Task<ActionResult<PlaylistTracks?>> GetTracksByPlaylistId(string id)
+    {
+        return await _apiService.GetWithBearerToken<PlaylistTracks>(
+            this.CreateRequestMessageWithBearerToken(HttpMethod.Get, $"{_apiConfig.TracksByPlaylistId}/{id}/tracks"));
     }
 }
