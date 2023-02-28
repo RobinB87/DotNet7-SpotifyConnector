@@ -6,13 +6,13 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar>
           <Stack spacing={1} direction="row">
-            <Button variant="contained" color="secondary" size="small">
+            <Button href={"/playlists"} variant="contained" color="secondary" size="small">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Playlists
               </Typography>
             </Button>
 
-            <Button variant="contained" color="secondary" size="small" disabled>
+            <Button href={"/upload"} variant="contained" color="secondary" size="small">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Add songs
               </Typography>
