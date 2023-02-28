@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
@@ -11,6 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 const theme = createTheme({
   palette: {
+    background: {
+      default: "#293329",
+    },
     primary: {
       light: "#66ffa6",
       main: "#00e676",
@@ -29,7 +33,9 @@ const theme = createTheme({
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
+      <CssBaseline>
+        <RouterProvider router={router} />
+      </CssBaseline>
     </ThemeProvider>
   </React.StrictMode>
 );
