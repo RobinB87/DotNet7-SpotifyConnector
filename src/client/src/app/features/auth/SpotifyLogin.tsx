@@ -25,7 +25,7 @@ const SpotifyLogin = () => {
             <Box sx={{ width: "50%", textAlign: "center", m: 20 }}>
               <Card variant="outlined">
                 <CardContent>
-                  <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+                  <Typography sx={{ fontSize: 18 }} color="text.secondary">
                     Please login to Spotify
                   </Typography>
                 </CardContent>
