@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@mui/material";
 
 import agent from "../../api/agent";
 
@@ -19,9 +20,9 @@ const SpotifyLogin = () => {
   return (
     <>
       {uri ? (
-        <a href={uri}>
-          <button>Login with Spotify</button>
-        </a>
+        <Button href={uri} variant="contained">
+          Login with Spotify
+        </Button>
       ) : (
         ""
       )}
