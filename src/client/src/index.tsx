@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import "./index.css";
-import { RouterProvider } from "react-router-dom";
 import { router } from "./app/router/Routes";
+import NavBar from "./app/components/navbar/NavBar";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -35,6 +36,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline>
+        <NavBar />
         <RouterProvider router={router} />
       </CssBaseline>
     </ThemeProvider>

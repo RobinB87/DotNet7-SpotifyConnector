@@ -27,10 +27,10 @@ const PlaylistDashboard = () => {
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <div style={{ width: "95%", display: "flex", justifyContent: "center" }}>
                   <Typography sx={{ fontSize: 18, width: "95%", marginBottom: 3 }} color="primary">
-                    Playlist overview
+                    Number of playlists:
                   </Typography>
                   <Typography sx={{ fontSize: 18, width: "5%" }} color="primary">
-                    {overview?.total}#
+                    {overview?.total}
                   </Typography>
                 </div>
               </div>
