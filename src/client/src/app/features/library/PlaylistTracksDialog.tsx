@@ -23,6 +23,12 @@ const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
     setOverview(await agent.Playlists.getTracksByPlaylistId(id));
   };
 
+  const createFullName = (artist: string, song: string) => {
+    const fullName = `${artist} - ${song}`;
+    const maxLength = 65;
+    return fullName.length > maxLength ? fullName.substring(0, maxLength).concat("...") : fullName;
+  };
+
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
@@ -30,9 +36,14 @@ const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
   });
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <div>
-        {overview?.trackSummaries && overview.trackSummaries.map((x) => <li key={x.track.id}>{x?.track?.name}</li>)}
+    <Dialog onClose={handleClose} open={open} fullWidth={true}>
+      <div style={{ backgroundColor: "#e60063" }}>
+        {overview?.trackSummaries &&
+          overview.trackSummaries.map((x) => (
+            <div key={x.track.id} style={{ paddingLeft: 5 }}>
+              {createFullName(x?.track?.artists?.[0]?.name, x?.track?.name)}
+            </div>
+          ))}
       </div>
     </Dialog>
   );
