@@ -20,7 +20,7 @@ const SpotifyLogin = () => {
   return (
     <>
       {uri ? (
-        <Button href={uri} variant="contained">
+        <Button href={uri} variant="contained" color="primary">
           Login with Spotify
         </Button>
       ) : (

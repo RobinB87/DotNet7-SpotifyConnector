@@ -1,15 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
+import { ThemeProvider, createTheme } from "@mui/material";
 
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./app/router/Routes";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#66ffa6",
+      main: "#00e676",
+      dark: "#00b248",
+      contrastText: "#000",
+    },
+    secondary: {
+      light: "#ff79b0",
+      main: "#ff4081",
+      dark: "#c60055",
+      contrastText: "#000",
+    },
+  },
+});
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
