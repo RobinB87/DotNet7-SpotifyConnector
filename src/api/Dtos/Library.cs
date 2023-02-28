@@ -5,13 +5,13 @@ namespace domain;
 public class Library
 {
     [JsonProperty("items")]
-    public List<Playlist> Playlists { get; set; } = new List<Playlist>();
+    public List<PlaylistSummary> Playlists { get; set; } = new List<PlaylistSummary>();
 
     [JsonProperty("total")]
     public int Total { get; set; }
 }
 
-public class Playlist
+public class PlaylistSummary
 {
     [JsonProperty("id")]
     public string Id { get; set; } = string.Empty;

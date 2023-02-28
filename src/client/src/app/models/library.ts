@@ -1,9 +1,9 @@
 export interface Library {
-  playlists: Playlist[];
+  playlists: PlaylistSummary[];
   total: number;
 }
 
-export interface Playlist {
+export interface PlaylistSummary {
   id: string;
   name: string;
   type: string;

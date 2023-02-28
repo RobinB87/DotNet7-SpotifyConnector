@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 import { AccessToken } from "../models/accessToken";
 import { Library } from "../models/library";
+import { PlaylistOverview } from "../models/playlistOverview";
 import TokenService from "../services/tokenService";
 
 axios.defaults.baseURL = "https://localhost:44381";
@@ -33,6 +34,7 @@ const Auth = {
 
 const Playlists = {
   get: () => requests.get<Library>(`/playlist`),
+  getById: (id: string) => requests.get<PlaylistOverview>(`/playlist/${id}`),
 };
 
 const agent = {
