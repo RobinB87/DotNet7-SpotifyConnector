@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
 import { Library } from "../../models/library";
+import PlaylistList from "./PlaylistList";
 
 const LibraryDashboard = () => {
   const dataFetchedRef = useRef(false);
@@ -35,20 +36,7 @@ const LibraryDashboard = () => {
                 </div>
               </div>
 
-              <Stack spacing={1} direction="column">
-                {overview?.playlists &&
-                  overview.playlists.map((p) => (
-                    <Button key={p.name} variant="contained" color="secondary">
-                      <Typography
-                        sx={{ fontSize: 16 }}
-                        style={{ width: "100%", display: "flex", justifyContent: "flex-start" }}
-                      >
-                        {p.name}
-                      </Typography>
-                      <Typography sx={{ fontSize: 16 }}>{p.tracks.total}</Typography>
-                    </Button>
-                  ))}
-              </Stack>
+              {overview?.playlists && <PlaylistList playlists={overview.playlists} />}
             </CardContent>
           </Card>
         </Box>
