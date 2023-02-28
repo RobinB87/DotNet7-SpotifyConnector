@@ -2,7 +2,7 @@
 
 namespace domain;
 
-public class PlaylistData
+public class Library
 {
     [JsonProperty("items")]
     public List<Playlist> Playlists { get; set; } = new List<Playlist>();
@@ -13,6 +13,9 @@ public class PlaylistData
 
 public class Playlist
 {
+    [JsonProperty("id")]
+    public string Id { get; set; } = string.Empty;
+
     [JsonProperty("name")]
     public string Name { get; set; } = string.Empty;
 

@@ -2,11 +2,11 @@ import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material
 import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
-import { PlaylistData } from "../../models/playlistData";
+import { Library } from "../../models/library";
 
-const PlaylistDashboard = () => {
+const LibraryDashboard = () => {
   const dataFetchedRef = useRef(false);
-  const [overview, setOverview] = useState<PlaylistData | null>(null);
+  const [overview, setOverview] = useState<Library | null>(null);
 
   const fetchData = async () => {
     setOverview(await agent.Playlists.get());
@@ -57,4 +57,4 @@ const PlaylistDashboard = () => {
   );
 };
 
-export default PlaylistDashboard;
+export default LibraryDashboard;

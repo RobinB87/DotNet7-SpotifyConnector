@@ -1,9 +1,10 @@
-export interface PlaylistData {
+export interface Library {
   playlists: Playlist[];
   total: number;
 }
 
 export interface Playlist {
+  id: string;
   name: string;
   type: string;
   uri: string;

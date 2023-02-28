@@ -2,7 +2,7 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 
 import App from "../../App";
 import Login from "../features/auth/Login";
-import PlaylistDashboard from "../features/playlistDashboard/PlaylistDashboard";
+import LibraryDashboard from "../features/library/LibraryDashboard";
 import PrivateRoutes from "./PrivateRoutes";
 
 export const homepage = "playlists";
@@ -23,7 +23,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: homepage,
-        element: <PlaylistDashboard />,
+        element: <LibraryDashboard />,
       },
     ],
   },
