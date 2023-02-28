@@ -1,9 +1,9 @@
 ﻿using api.Core.Configuration;
+using api.Core.Extensions;
+using api.Services;
 using domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
 
 namespace api.Controllers;
 
@@ -11,31 +11,21 @@ namespace api.Controllers;
 [Route("[controller]")]
 public class PlaylistController : ControllerBase
 {
-    private readonly DataConfiguration _dataConfig;
+    private readonly ApiConfiguration _apiConfig;
+    private readonly ApiService _apiService;
 
-    public PlaylistController(IOptions<DataConfiguration> dataConfig)
+    public PlaylistController(IOptions<ApiConfiguration> apiConfig, ApiService apiService)
     {
-        _dataConfig = dataConfig.Value
-            ?? throw new ArgumentNullException(nameof(dataConfig));
+        _apiConfig = apiConfig.Value ?? throw new ArgumentNullException(nameof(apiConfig));
+        _apiService = apiService ?? throw new ArgumentNullException(nameof(apiService));
     }
 
     [HttpGet]
     public async Task<ActionResult<PlaylistOverview?>> Get()
     {
-        var token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
+        var response = await _apiService.GetWithBearerToken<PlaylistOverview>(
+            this.CreateRequestMessageWithBearerToken(HttpMethod.Get, _apiConfig.PlaylistUri));
 
-        var client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Accept", "application/json");
-        //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue($"Bearer", token);
-
-        var response = await client.GetAsync($"{_dataConfig.ApiUriBase}/{_dataConfig.PlaylistUri}");
-
-        if (response.IsSuccessStatusCode)
-        {
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<PlaylistOverview>(content);
-        }
-
-        return BadRequest();
+        return response;
     }
 }

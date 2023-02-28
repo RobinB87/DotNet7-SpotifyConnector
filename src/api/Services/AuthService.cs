@@ -20,8 +20,7 @@ public class AuthService
 
     public async Task<string?> GetSpotifyLoginUri()
     {
-        var response = await _client.GetAsync(_authConfig.GetAuthorizationCodeUri());
-
+        var response = await _client.SendAsync(_authConfig.GetAuthorizationCodeUri());
         return response.IsSuccessStatusCode
             ? response.RequestMessage?.RequestUri?.ToString()
             : response.StatusCode.ToString();

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace api.Core.Extensions;
 internal static class SpotifyConfigurationExtensions
 {
-    internal static Uri GetAuthorizationCodeUri(this AuthConfiguration config)
+    internal static HttpRequestMessage GetAuthorizationCodeUri(this AuthConfiguration config)
     {
         var authParams = new Dictionary<string, string?> {
             { "client_id", config.ClientId },
@@ -12,8 +12,8 @@ internal static class SpotifyConfigurationExtensions
             { "redirect_uri", config.RedirectUri },
             { "scope", config.Scope }};
 
-        return new Uri(QueryHelpers.AddQueryString(
-            $"{config.BaseUri}/{config.AuthorizeUri}", authParams));
+        var uri = QueryHelpers.AddQueryString(config.AuthorizeUri, authParams);
+        return new HttpRequestMessage(HttpMethod.Get, uri);
     }
 
     internal static HttpRequestMessage GetAccessTokenRequestMessage(this AuthConfiguration config, string authorizationCode)
@@ -25,7 +25,7 @@ internal static class SpotifyConfigurationExtensions
             { "grant_type", config.GrantType }
         };
 
-        return new HttpRequestMessage(HttpMethod.Post, $"{config.BaseUri}/{config.TokenRequestUri}")
+        return new HttpRequestMessage(HttpMethod.Post, config.TokenRequestUri)
         {
             Content = new FormUrlEncodedContent(content)
         };

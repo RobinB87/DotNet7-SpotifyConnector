@@ -9,7 +9,7 @@ internal static class ConfigurationServiceCollectionExtensions
         IConfiguration configuration)
     {
         services.ConfigureOptions<AuthConfiguration>(configuration.GetSection(AuthConfiguration.AppSettingsName));
-        services.ConfigureOptions<DataConfiguration>(configuration.GetSection(DataConfiguration.AppSettingsName));
+        services.ConfigureOptions<ApiConfiguration>(configuration.GetSection(ApiConfiguration.AppSettingsName));
 
         return services;
     }

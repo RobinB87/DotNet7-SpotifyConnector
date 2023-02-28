@@ -1,9 +1,9 @@
 ﻿namespace api.Core.Configuration;
-public class DataConfiguration
+public class ApiConfiguration
 {
-    public const string AppSettingsName = "Data";
+    public const string AppSettingsName = "Api";
 
-    public string ApiUriBase { get; set; } = string.Empty;
+    public string BaseUri { get; set; } = string.Empty;
     public string PlaylistUri { get; set; } = string.Empty;
     public string SearchUri { get; set; } = string.Empty;
 }
