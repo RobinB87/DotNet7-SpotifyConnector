@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
 import agent from "../../api/agent";
-import { PlaylistOverview } from "../../models/playlist";
+import { PlaylistData } from "../../models/playlistData";
 
-const Playlists = () => {
+const PlaylistDashboard = () => {
   const dataFetchedRef = useRef(false);
-  const [overview, setOverview] = useState<PlaylistOverview | null>(null);
+  const [overview, setOverview] = useState<PlaylistData | null>(null);
 
   const fetchData = async () => {
     setOverview(await agent.Playlists.get());
@@ -20,9 +20,9 @@ const Playlists = () => {
   return (
     <>
       <div>Playlist overview</div>
-      {overview?.items && overview.items.map((p) => <li key={p.name}>{p.name}</li>)}
+      {overview?.playlists && overview.playlists.map((p) => <li key={p.name}>{p.name}</li>)}
     </>
   );
 };
 
-export default Playlists;
+export default PlaylistDashboard;

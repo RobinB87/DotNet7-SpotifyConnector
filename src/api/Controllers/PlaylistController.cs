@@ -21,9 +21,9 @@ public class PlaylistController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PlaylistOverview?>> Get()
+    public async Task<ActionResult<PlaylistData?>> Get()
     {
-        var response = await _apiService.GetWithBearerToken<PlaylistOverview>(
+        var response = await _apiService.GetWithBearerToken<PlaylistData>(
             this.CreateRequestMessageWithBearerToken(HttpMethod.Get, _apiConfig.PlaylistUri));
 
         return response;
