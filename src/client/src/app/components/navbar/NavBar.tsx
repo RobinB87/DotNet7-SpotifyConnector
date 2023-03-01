@@ -19,7 +19,7 @@ const NavBar = () => {
 
             <Button href={"/tracks-add"} variant="contained" color="secondary" size="small">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Add songs
+                Add
               </Typography>
             </Button>
           </Stack>

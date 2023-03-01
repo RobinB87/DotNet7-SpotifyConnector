@@ -22,8 +22,8 @@ const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
     onClose();
   };
 
-  const createFullName = (artist: string, song: string) => {
-    const fullName = `${artist} - ${song}`;
+  const createFullName = (artist: string, track: string) => {
+    const fullName = `${artist} - ${track}`;
     const maxLength = 65;
     return fullName.length > maxLength ? fullName.substring(0, maxLength).concat("...") : fullName;
   };

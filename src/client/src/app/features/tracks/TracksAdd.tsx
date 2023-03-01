@@ -28,7 +28,7 @@ const TracksAdd = () => {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <Box sx={{ width: "75%", m: 2 }}>
+      <Box sx={{ width: "50%", m: 2 }}>
         <Card variant="outlined">
           <form>
             <CardContent>
