@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 import { AccessToken } from "../models/accessToken";
+import { AddTracksRequest } from "../models/addTracksRequest";
 import { Library } from "../models/library";
 import { PlaylistTracks } from "../models/playlistTracks";
 import TokenService from "../services/tokenService";
@@ -35,6 +36,7 @@ const Auth = {
 const Playlists = {
   get: () => requests.get<Library>(`/playlist`),
   getTracksByPlaylistId: (id: string) => requests.get<PlaylistTracks>(`/playlist/${id}/tracks`),
+  add: (req: AddTracksRequest) => requests.post(`/playlist/add`, req),
 };
 
 const agent = {

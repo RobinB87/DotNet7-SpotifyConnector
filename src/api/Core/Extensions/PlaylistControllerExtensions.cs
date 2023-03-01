@@ -17,4 +17,15 @@ internal static class PlaylistControllerExtensions
         request.Headers.Authorization = new AuthenticationHeaderValue($"Bearer", token);
         return request;
     }
+
+    internal static HttpRequestMessage CreateRequestMessageWithBearerToken(
+        this PlaylistController controller,
+        HttpMethod method,
+        string uri,
+        StringContent content)
+    {
+        var request = CreateRequestMessageWithBearerToken(controller, method, uri);
+        request.Content = content;
+        return request;
+    }
 }

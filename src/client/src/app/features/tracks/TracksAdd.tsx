@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Button, Card, CardActions, CardContent, Input, InputLabel, TextField } from "@mui/material";
+import agent from "../../api/agent";
 
 const TracksAdd = () => {
   const { id } = useParams();
@@ -15,9 +16,9 @@ const TracksAdd = () => {
     setUris(event.target.value);
   };
 
-  const handleSubmit = () => {
-    console.log(playlistId);
-    console.log(uris);
+  const handleSubmit = async () => {
+    if (!playlistId || !uris) console.log("not valid..");
+    await agent.Playlists.add({ playlistId, uris });
   };
 
   useEffect(() => {

@@ -10,7 +10,7 @@ public class ApiService
         _client = client ?? throw new ArgumentNullException(nameof(client));
     }
 
-    public async Task<T?> GetWithBearerToken<T>(HttpRequestMessage requestMessage)
+    public async Task<T?> SendWithBearerToken<T>(HttpRequestMessage requestMessage)
     {
         var response = await _client.SendAsync(requestMessage);
         if (response.IsSuccessStatusCode)

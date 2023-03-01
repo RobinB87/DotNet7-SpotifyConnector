@@ -5,6 +5,7 @@ using api.Services;
 using domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace api.Controllers;
 
@@ -22,16 +23,21 @@ public class PlaylistController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<Library?>> Get()
-    {
-        return await _apiService.GetWithBearerToken<Library>(
-            this.CreateRequestMessageWithBearerToken(HttpMethod.Get, _apiConfig.PlaylistUri));
-    }
+    public async Task<ActionResult<Library?>> Get() =>
+        await _apiService.SendWithBearerToken<Library>(
+            this.CreateRequestMessageWithBearerToken(HttpMethod.Get, 
+            _apiConfig.PlaylistUri));
 
     [HttpGet("{id}/tracks")]
-    public async Task<ActionResult<PlaylistTracks?>> GetTracksByPlaylistId(string id)
-    {
-        return await _apiService.GetWithBearerToken<PlaylistTracks>(
-            this.CreateRequestMessageWithBearerToken(HttpMethod.Get, $"{_apiConfig.TracksByPlaylistId}/{id}/tracks"));
-    }
+    public async Task<ActionResult<PlaylistTracks?>> GetTracksByPlaylistId(string id) =>
+        await _apiService.SendWithBearerToken<PlaylistTracks>(
+            this.CreateRequestMessageWithBearerToken(HttpMethod.Get, 
+            $"{_apiConfig.TracksByPlaylistId}/{id}/tracks"));
+
+    [HttpPost("add")]
+    public async Task AddTracksToPlaylist(AddTracksRequest req) =>
+        await _apiService.SendWithBearerToken<object>(
+            this.CreateRequestMessageWithBearerToken(HttpMethod.Post,
+            $"{_apiConfig.TracksByPlaylistId}/{req.PlaylistId}/tracks",
+            new StringContent(req.CreateUriArrayString(), Encoding.UTF8, "application/json")));
 }
