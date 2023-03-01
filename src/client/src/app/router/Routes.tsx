@@ -3,6 +3,7 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 import App from "../../App";
 import Login from "../features/auth/Login";
 import LibraryDashboard from "../features/library/LibraryDashboard";
+import Search from "../features/search/Search";
 import TracksAdd from "../features/tracks/TracksAdd";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -25,6 +26,10 @@ export const routes: RouteObject[] = [
       {
         path: homepage,
         element: <LibraryDashboard />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
       {
         path: "/tracks-add/:id",
