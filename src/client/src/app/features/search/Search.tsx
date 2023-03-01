@@ -14,8 +14,8 @@ interface TrackCardProps {
 const TrackCard = ({ id, artists, track }: TrackCardProps) => {
   return (
     <Box sx={{ m: 1 }}>
-      <Card variant="outlined" style={{ backgroundColor: "#e60063" }}>
-        <CardContent>
+      <Card variant="outlined" style={{ backgroundColor: "#e60063", height: 65 }}>
+        <CardContent sx={{ p: 0.5 }}>
           <Typography sx={{ fontSize: 14 }}>{track}</Typography>
           {artists &&
             artists.map((x) => (
@@ -75,7 +75,7 @@ const Search = () => {
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         {tracksSummary?.tracks && (
-          <Box sx={{ width: "50%", m: 2 }}>
+          <Box sx={{ width: "50%", m: 2, maxHeight: 375, overflow: "auto" }}>
             <Card variant="outlined">
               <CardContent>
                 <Typography sx={{ fontSize: 16 }}>Tracks found: {tracksSummary.total}</Typography>

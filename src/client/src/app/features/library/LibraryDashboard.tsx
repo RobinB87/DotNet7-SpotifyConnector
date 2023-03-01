@@ -14,15 +14,15 @@ const LibraryDashboard = () => {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Box sx={{ width: "75%", m: 2 }}>
-          <Card style={{ backgroundColor: "	#282828" }}>
+        <Box sx={{ width: "50%", m: 2, maxHeight: 700, overflow: "auto" }}>
+          <Card>
             <CardContent>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <div style={{ width: "95%", display: "flex", justifyContent: "center" }}>
-                  <Typography sx={{ fontSize: 18, width: "95%", marginBottom: 3 }} color="primary">
+                  <Typography sx={{ fontSize: 18, width: "95%", marginBottom: 3 }} color="secondary.dark">
                     Number of playlists:
                   </Typography>
-                  <Typography sx={{ fontSize: 18, width: "5%" }} color="primary">
+                  <Typography sx={{ fontSize: 18, width: "5%" }} color="secondary.dark">
                     {data?.total}
                   </Typography>
                 </div>
