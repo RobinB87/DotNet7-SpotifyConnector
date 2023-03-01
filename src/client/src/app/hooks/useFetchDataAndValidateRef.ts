@@ -5,7 +5,7 @@ export interface FetchDataAndValidateRefProps<T> {
   callback: () => Promise<T | null>;
 }
 
-/* Hook to ensure api is called only once, because of StrictMode */
+/* Hook to ensure api is called only once (because of StrictMode) and sets/gets the data */
 const useFetchDataAndValidateRef = <T>(props: FetchDataAndValidateRefProps<T>) => {
   const [data, setData] = useState<T | null>(props.initialState);
   const dataFetchedRef = useRef(false);
