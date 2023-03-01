@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace domain;
+namespace api.Models;
 public class AccessToken
 {
     [JsonProperty("access_token")]

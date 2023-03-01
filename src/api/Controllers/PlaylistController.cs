@@ -1,8 +1,7 @@
 ﻿using api.Core.Configuration;
 using api.Core.Extensions;
-using api.Dtos;
+using api.Models;
 using api.Services;
-using domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Text;
@@ -40,4 +39,22 @@ public class PlaylistController : ControllerBase
             this.CreateRequestMessageWithBearerToken(HttpMethod.Post,
             $"{_apiConfig.TracksByPlaylistId}/{req.PlaylistId}/tracks",
             new StringContent(req.CreateUriArrayString(), Encoding.UTF8, "application/json")));
+
+    [HttpPost("search")]
+    public async Task<ActionResult<SearchTracksSummary>> Search(SearchRequest req)
+    {
+        var queries = req.CreateQueryArray();
+        var tasks = new List<Task<SearchTracksWrapper?>>();
+        foreach (var query in queries)
+        {
+            var requestMessage = this.CreateRequestMessageWithBearerToken(
+                HttpMethod.Get, $"{_apiConfig.TrackUriBase}?{query}");
+            tasks.Add(_apiService.SendWithBearerToken<SearchTracksWrapper>(requestMessage));
+        }
+
+        var trackWrappers = await Task.WhenAll(tasks);
+        var trackSummary = trackWrappers.SkipWrapperAndMerge();
+
+        return trackSummary.Tracks.Any() ? trackSummary : NotFound();
+    }
 }

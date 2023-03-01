@@ -1,6 +1,6 @@
 ﻿using api.Core.Configuration;
 using api.Core.Extensions;
-using domain;
+using api.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;

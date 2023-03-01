@@ -1,5 +1,5 @@
 using api.Services;
-using domain;
+using api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers;

@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace domain;
-
+namespace api.Models;
 public class Library
 {
     [JsonProperty("items")]
-    public List<PlaylistSummary> Playlists { get; set; } = new List<PlaylistSummary>();
+    public IEnumerable<PlaylistSummary> Playlists { get; set; } = new List<PlaylistSummary>();
 
     [JsonProperty("total")]
     public int Total { get; set; }

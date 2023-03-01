@@ -4,6 +4,7 @@ import { AccessToken } from "../models/accessToken";
 import { AddTracksRequest } from "../models/addTracksRequest";
 import { Library } from "../models/library";
 import { PlaylistTracks } from "../models/playlistTracks";
+import { SearchRequest } from "../models/searchRequest";
 import TokenService from "../services/tokenService";
 
 axios.defaults.baseURL = "https://localhost:44381";
@@ -37,6 +38,7 @@ const Playlists = {
   get: () => requests.get<Library>(`/playlist`),
   getTracksByPlaylistId: (id: string) => requests.get<PlaylistTracks>(`/playlist/${id}/tracks`),
   add: (req: AddTracksRequest) => requests.post(`/playlist/add`, req),
+  search: (req: SearchRequest) => requests.post(`/playlist/search`, req),
 };
 
 const agent = {

@@ -16,6 +16,7 @@ const TracksAdd = () => {
     setUris(event.target.value);
   };
 
+  // TODO: should be done in batches of max 20?
   const handleSubmit = async () => {
     if (!playlistId || !uris) console.log("not valid..");
     await agent.Playlists.add({ playlistId, uris });
@@ -42,7 +43,7 @@ const TracksAdd = () => {
                 />
               </div>
               <div>
-                <InputLabel>Uri list</InputLabel>
+                <InputLabel>Semicolon separated uri list</InputLabel>
                 <TextField
                   label="Uri list"
                   variant="outlined"

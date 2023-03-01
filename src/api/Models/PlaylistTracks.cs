@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace api.Dtos;
+namespace api.Models;
 public class PlaylistTracks
 {
     [JsonProperty("items")]
-    public List<TrackSummary> TrackSummaries { get; set; } = new List<TrackSummary>();
+    public IEnumerable<TrackSummary> TrackSummaries { get; set; } = new List<TrackSummary>();
 
     [JsonProperty("total")]
     public int Total { get; set; }
@@ -22,7 +22,7 @@ public class Track
     public Album? Album { get; set; }
 
     [JsonProperty("artists")]
-    public List<Artist> Artists { get; set; } = new List<Artist>();
+    public IEnumerable<Artist> Artists { get; set; } = new List<Artist>();
 
     [JsonProperty("id")]
     public string Id { get; set; } = string.Empty;
@@ -37,7 +37,7 @@ public class Track
 public class Album
 {
     [JsonProperty("artists")]
-    public List<Artist> Artists { get; set; } = new List<Artist>();
+    public IEnumerable<Artist> Artists { get; set; } = new List<Artist>();
 
     [JsonProperty("id")]
     public string Id { get; set; } = string.Empty;
