@@ -15,7 +15,7 @@ const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
 
   const { data } = useFetchDataAndValidateRef<PlaylistTracks | null>({
     initialState: null,
-    callback: async () => await agent.Playlists.getTracksByPlaylistId(id),
+    callback: () => agent.Playlists.getTracksByPlaylistId(id),
   });
 
   const handleClose = () => {

@@ -8,7 +8,7 @@ import PlaylistList from "./PlaylistList";
 const LibraryDashboard = () => {
   const { data } = useFetchDataAndValidateRef<Library | null>({
     initialState: null,
-    callback: async () => await agent.Playlists.get(),
+    callback: () => agent.Playlists.get(),
   });
 
   return (

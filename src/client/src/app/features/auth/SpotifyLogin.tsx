@@ -6,7 +6,7 @@ import useFetchDataAndValidateRef from "../../hooks/useFetchDataAndValidateRef";
 const SpotifyLogin = () => {
   const { data } = useFetchDataAndValidateRef<string>({
     initialState: "",
-    callback: async () => await agent.Auth.login(),
+    callback: () => agent.Auth.login(),
   });
 
   return (
