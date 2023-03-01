@@ -1,23 +1,14 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import agent from "../../api/agent";
+import useFetchDataAndValidateRef from "../../hooks/useFetchDataAndValidateRef";
 import { Library } from "../../models/library";
 import PlaylistList from "./PlaylistList";
 
 const LibraryDashboard = () => {
-  const dataFetchedRef = useRef(false);
   const [overview, setOverview] = useState<Library | null>(null);
-
-  const fetchData = async () => {
-    setOverview(await agent.Playlists.get());
-  };
-
-  useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    fetchData();
-  });
+  useFetchDataAndValidateRef(async () => setOverview(await agent.Playlists.get()));
 
   return (
     <>

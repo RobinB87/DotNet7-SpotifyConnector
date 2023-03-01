@@ -1,21 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 
 import agent from "../../api/agent";
+import useFetchDataAndValidateRef from "../../hooks/useFetchDataAndValidateRef";
 
 const SpotifyLogin = () => {
-  const dataFetchedRef = useRef(false);
   const [uri, setUri] = useState("");
-
-  const fetchData = async () => {
-    setUri(await agent.Auth.login());
-  };
-
-  useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    fetchData();
-  }, []);
+  useFetchDataAndValidateRef(async () => setUri(await agent.Auth.login()));
 
   return (
     <>
