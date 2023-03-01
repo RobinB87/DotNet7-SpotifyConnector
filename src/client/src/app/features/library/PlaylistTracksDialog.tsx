@@ -1,4 +1,4 @@
-import { Dialog } from "@mui/material";
+import { Button, Dialog } from "@mui/material";
 
 import agent from "../../api/agent";
 import { PlaylistTracks } from "../../models/playlistTracks";
@@ -31,6 +31,9 @@ const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
   return (
     <Dialog onClose={handleClose} open={open} fullWidth={true}>
       <div style={{ backgroundColor: "#e60063" }}>
+        <Button href={`/tracks-add/${id}`} variant="contained" sx={{ width: "98%", m: "1%" }}>
+          Add tracks to this playlist
+        </Button>
         {data?.trackSummaries &&
           data.trackSummaries.map((x) => (
             <div key={x.track.id} style={{ paddingLeft: 5 }}>

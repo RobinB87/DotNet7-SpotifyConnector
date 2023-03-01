@@ -27,6 +27,10 @@ export const routes: RouteObject[] = [
         element: <LibraryDashboard />,
       },
       {
+        path: "/tracks-add/:id",
+        element: <TracksAdd />,
+      },
+      {
         path: "/tracks-add",
         element: <TracksAdd />,
       },
