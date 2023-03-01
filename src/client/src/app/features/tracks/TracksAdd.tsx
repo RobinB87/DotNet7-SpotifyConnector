@@ -1,7 +1,9 @@
-import { Box, Button, Card, CardActions, CardContent, Input, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Box, Button, Card, CardActions, CardContent, Input, InputLabel, TextField } from "@mui/material";
 
 const TracksAdd = () => {
+  const { id } = useParams();
   const [playlistId, setPlaylistId] = useState("");
   const [uris, setUris] = useState("");
 
@@ -18,6 +20,10 @@ const TracksAdd = () => {
     console.log(uris);
   };
 
+  useEffect(() => {
+    if (id) setPlaylistId(id);
+  }, [id]);
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Box sx={{ width: "75%", m: 2 }}>
@@ -25,14 +31,17 @@ const TracksAdd = () => {
           <form>
             <CardContent>
               <div style={{ marginBottom: "8px" }}>
+                <InputLabel>Playlist id</InputLabel>
                 <Input
                   placeholder="Playlist id"
                   sx={{ width: "100%" }}
                   disableUnderline={true}
                   onChange={handlePlaylistIdChange}
+                  value={playlistId}
                 />
               </div>
               <div>
+                <InputLabel>Uri list</InputLabel>
                 <TextField
                   label="Uri list"
                   variant="outlined"
@@ -40,6 +49,7 @@ const TracksAdd = () => {
                   rows={8}
                   sx={{ width: "100%" }}
                   onChange={handleUrisChange}
+                  value={uris}
                 />
               </div>
             </CardContent>
