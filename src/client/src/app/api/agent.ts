@@ -17,8 +17,8 @@ axios.interceptors.request.use((config) => {
     const token = TokenService.getToken();
     config.headers.Authorization = `Bearer ${token}`;
   } else {
-    // Refresh token
-    // If that one is invalid, redirect to login?
+    console.log("Token not valid");
+    // TODO: Refresh token: if that one is invalid, redirect to login?
   }
   return config;
 });
