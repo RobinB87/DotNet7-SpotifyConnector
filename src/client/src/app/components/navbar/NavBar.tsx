@@ -12,7 +12,7 @@ const NavBar = () => {
               </Typography>
             </Button>
 
-            <Button href={"/upload"} variant="contained" color="secondary" size="small">
+            <Button href={"/tracks-add"} variant="contained" color="secondary" size="small">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Add songs
               </Typography>
