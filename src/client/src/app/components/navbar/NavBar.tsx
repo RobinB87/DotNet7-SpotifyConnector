@@ -1,4 +1,5 @@
 import { Box, AppBar, Toolbar, Typography, Button, Stack } from "@mui/material";
+
 const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
