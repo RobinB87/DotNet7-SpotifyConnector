@@ -1,16 +1,17 @@
-import { useState } from "react";
 import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 
 import agent from "../../api/agent";
 import useFetchDataAndValidateRef from "../../hooks/useFetchDataAndValidateRef";
 
 const SpotifyLogin = () => {
-  const [uri, setUri] = useState("");
-  useFetchDataAndValidateRef(async () => setUri(await agent.Auth.login()));
+  const { data } = useFetchDataAndValidateRef<string>({
+    initialState: "",
+    callback: async () => await agent.Auth.login(),
+  });
 
   return (
     <>
-      {uri && (
+      {data && (
         <>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Box sx={{ width: "50%", textAlign: "center", m: 20 }}>
@@ -21,7 +22,7 @@ const SpotifyLogin = () => {
                   </Typography>
                 </CardContent>
                 <CardActions style={{ justifyContent: "center" }}>
-                  <Button href={uri} variant="contained" color="primary">
+                  <Button href={data} variant="contained" color="primary">
                     Login with Spotify
                   </Button>
                 </CardActions>

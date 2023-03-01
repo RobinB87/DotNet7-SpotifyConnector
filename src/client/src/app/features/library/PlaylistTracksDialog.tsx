@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Dialog } from "@mui/material";
 
 import agent from "../../api/agent";
@@ -13,8 +12,11 @@ export interface PlaylistTracksProps {
 
 const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
   const { id, onClose, open } = props;
-  const [overview, setOverview] = useState<PlaylistTracks | null>(null);
-  useFetchDataAndValidateRef(async () => setOverview(await agent.Playlists.getTracksByPlaylistId(id)));
+
+  const { data } = useFetchDataAndValidateRef<PlaylistTracks | null>({
+    initialState: null,
+    callback: async () => await agent.Playlists.getTracksByPlaylistId(id),
+  });
 
   const handleClose = () => {
     onClose();
@@ -29,8 +31,8 @@ const PlaylistTracksDialog = (props: PlaylistTracksProps) => {
   return (
     <Dialog onClose={handleClose} open={open} fullWidth={true}>
       <div style={{ backgroundColor: "#e60063" }}>
-        {overview?.trackSummaries &&
-          overview.trackSummaries.map((x) => (
+        {data?.trackSummaries &&
+          data.trackSummaries.map((x) => (
             <div key={x.track.id} style={{ paddingLeft: 5 }}>
               {createFullName(x?.track?.artists?.[0]?.name, x?.track?.name)}
             </div>

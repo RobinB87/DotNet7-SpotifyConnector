@@ -14,7 +14,7 @@ const Token = (props: ITokenProps) => {
     router.navigate(homepage);
   };
 
-  useFetchDataAndValidateRef(handleFetchedData);
+  useFetchDataAndValidateRef({ initialState: null, callback: handleFetchedData });
 
   return <></>;
 };

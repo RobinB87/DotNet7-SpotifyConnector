@@ -1,5 +1,4 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import { useState } from "react";
 
 import agent from "../../api/agent";
 import useFetchDataAndValidateRef from "../../hooks/useFetchDataAndValidateRef";
@@ -7,8 +6,10 @@ import { Library } from "../../models/library";
 import PlaylistList from "./PlaylistList";
 
 const LibraryDashboard = () => {
-  const [overview, setOverview] = useState<Library | null>(null);
-  useFetchDataAndValidateRef(async () => setOverview(await agent.Playlists.get()));
+  const { data } = useFetchDataAndValidateRef<Library | null>({
+    initialState: null,
+    callback: async () => await agent.Playlists.get(),
+  });
 
   return (
     <>
@@ -22,12 +23,12 @@ const LibraryDashboard = () => {
                     Number of playlists:
                   </Typography>
                   <Typography sx={{ fontSize: 18, width: "5%" }} color="primary">
-                    {overview?.total}
+                    {data?.total}
                   </Typography>
                 </div>
               </div>
 
-              {overview?.playlists && <PlaylistList playlists={overview.playlists} />}
+              {data?.playlists && <PlaylistList playlists={data.playlists} />}
             </CardContent>
           </Card>
         </Box>

@@ -1,13 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type CallbackFunction = () => void;
+export interface FetchDataAndValidateRefProps<T> {
+  initialState: T | null;
+  callback: () => Promise<T | null>;
+}
 
 /* Hook to ensure api is called only once, because of StrictMode */
-const useFetchDataAndValidateRef = (callback: CallbackFunction) => {
+const useFetchDataAndValidateRef = <T>(props: FetchDataAndValidateRefProps<T>) => {
+  const [data, setData] = useState<T | null>(props.initialState);
   const dataFetchedRef = useRef(false);
 
   const fetchData = async () => {
-    callback();
+    setData(await props.callback());
   };
 
   useEffect(() => {
@@ -15,6 +19,8 @@ const useFetchDataAndValidateRef = (callback: CallbackFunction) => {
     dataFetchedRef.current = true;
     fetchData();
   });
+
+  return { data };
 };
 
 export default useFetchDataAndValidateRef;
