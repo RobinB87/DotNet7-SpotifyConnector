@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace Tests.Integration.Controllers
+namespace tests.integration.Controllers
 {
     public class AuthControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {

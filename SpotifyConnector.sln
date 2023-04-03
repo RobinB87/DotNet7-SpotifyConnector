@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{789295EB-3E6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "src\api\api.csproj", "{1C0E9B66-5CD9-4140-9B25-21E28776B1F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Integration", "src\tests\Tests.Integration\Tests.Integration.csproj", "{59709D6F-A7AC-4320-87F6-F2BFBAEA4CDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tests.integration", "src\tests\Tests.Integration\tests.integration.csproj", "{59709D6F-A7AC-4320-87F6-F2BFBAEA4CDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
